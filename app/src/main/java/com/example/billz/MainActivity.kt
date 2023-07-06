@@ -14,13 +14,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_main)
+
     }
 
     override fun onResume() {
         super.onResume()
-        super.onResume()
         setContentView(binding.root)
         binding.button.setOnClickListener {
+
             validateregdetails()
             clearErrors()
         }
@@ -35,19 +36,20 @@ class MainActivity : AppCompatActivity() {
 
         var error = false
 
-        if (name1.isEmpty()) {
+
+        if (name1.isBlank()) {
             binding.tilname.error = " Name required"
             error = true
         }
-        if (name2.isEmpty()) {
+        if (name2.isBlank()) {
             binding.tilusername.error = " UserName required"
             error = true
         }
-        if (name3.isEmpty()) {
+        if (name3.isBlank()) {
             binding.tilnumber.error = " Phone number required"
             error = true
         }
-        if (name4.isEmpty()) {
+        if (name4.isBlank()) {
             binding.tilpassword.error = " Create password"
             error = true
         }
@@ -56,9 +58,9 @@ class MainActivity : AppCompatActivity() {
             error = true
         }
         if (!error) {
-         val y = Intent(this,loginpage::class.java)
-        startActivity(y)
-            Toast.makeText(this, "Registration is complete", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this, loginpage::class.java)
+            startActivity(intent)
+            Toast.makeText(this, "Registration is complete", Toast.LENGTH_LONG).show()
             finish()
         }
     }
