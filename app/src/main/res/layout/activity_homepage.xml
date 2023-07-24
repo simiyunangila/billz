@@ -11,22 +11,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="16dp"
         android:text="Welcome to billZ"
         android:textColor="#9C27B0"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.49"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="443dp"
-        android:layout_height="777dp"
-        app:srcCompat="@drawable/money"
-        tools:layout_editor_absoluteX="-2dp"
-        tools:layout_editor_absoluteY="-90dp" />
+        android:layout_width="416dp"
+        android:layout_height="566dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.521"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/money" />
 </androidx.constraintlayout.widget.ConstraintLayout>

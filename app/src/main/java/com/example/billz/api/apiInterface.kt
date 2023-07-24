@@ -11,5 +11,6 @@ import retrofit2.http.POST
 interface ApiInterface {
     @POST("/users/register")
     suspend fun registerUser(@Body registerRequest: RegisterRequest):Response<registerResponse>
+    @POST("/users/login")
     suspend fun loginUser(@Body loginRequest: LoginRequest):Response<LoginResponse>
 }

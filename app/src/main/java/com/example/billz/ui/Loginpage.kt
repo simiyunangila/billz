@@ -31,17 +31,20 @@ class loginpage : AppCompatActivity() {
         })
         userViewModel.logLiveData.observe(this, Observer { logResponse ->
             Toast.makeText(this, logResponse.message, Toast.LENGTH_LONG).show()
-            startActivity(Intent(this, loginpage::class.java))
+            startActivity(Intent(this, homepage::class.java))
             binding.pBar.visibility = View.GONE
         })
         binding.button2.setOnClickListener {
             validatelogin()
-            clearErrors()
+
         }
 
     }
 
     fun validatelogin(){
+
+        clearErrors()
+
         val email =binding.etemail.text.toString()
         val password=binding.etpasssword.text.toString()
         var error = false
@@ -59,14 +62,14 @@ class loginpage : AppCompatActivity() {
         if (!error) {
             val loginRequest = LoginRequest(
                 email = email,
-                password = password,
+                password = password
 
             )
            binding.pBar.visibility = View.VISIBLE
             userViewModel.loginUser(loginRequest )
 
-            val intent = Intent(this, homepage::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, homepage::class.java)
+//            startActivity(intent)
 
         }
     }

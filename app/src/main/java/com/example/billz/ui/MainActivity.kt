@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
       }
 //            startActivity(Intent(this, loginpage::class.java))
 
-//            clearErrors()
+
 
 
 
@@ -49,6 +49,8 @@ class MainActivity : AppCompatActivity() {
 //    }
 
     fun validateregdetails() {
+
+        clearErrors()
         val name = binding.etname.text.toString()
         val lastname = binding.etlastname.text.toString()
         val phoneNumber= binding.etnumber.text.toString()
@@ -101,8 +103,8 @@ class MainActivity : AppCompatActivity() {
             binding.pbreg.visibility = View.VISIBLE
            userViewModel.registerUser(registerRequest)
 
-            val intent = Intent(this, loginpage::class.java)
-            startActivity(intent)
+//            val intent = Intent(this, loginpage::class.java)
+//            startActivity(intent)
 
         }
     }
