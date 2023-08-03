@@ -68,9 +68,6 @@ class loginpage : AppCompatActivity() {
            binding.pBar.visibility = View.VISIBLE
             userViewModel.loginUser(loginRequest )
 
-//            val intent = Intent(this, homepage::class.java)
-//            startActivity(intent)
-
         }
     }
     fun clearErrors(){
