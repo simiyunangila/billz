@@ -1,5 +1,6 @@
 package com.example.billz.ui
 
+import android.content.Context
 import android.content.Intent
 import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import com.example.billz.R
 import com.example.billz.ViewModel.UserViewModel
 import com.example.billz.databinding.ActivityMainBinding
 import com.example.billz.model.RegisterRequest
+import com.example.billz.utils.Constant
 
 
 class MainActivity : AppCompatActivity() {
@@ -20,25 +22,27 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_main)
+        setContentView(binding.root)
+        redirectUser()
 
     }
 
     override fun onResume() {
         super.onResume()
-        setContentView(binding.root)
+        binding.button.setOnClickListener {
+            validateregdetails()
+        }
         userViewModel.errLiveData.observe(this, Observer { error ->
             Toast.makeText(this, error, Toast.LENGTH_LONG).show()
             binding.pbreg.visibility = View.GONE
         })
         userViewModel.regLiveData.observe(this, Observer { regResponse ->
+
             Toast.makeText(this, regResponse.message, Toast.LENGTH_LONG).show()
             startActivity(Intent(this, loginpage::class.java))
             binding.pbreg.visibility = View.GONE
         })
-      binding.button.setOnClickListener {
-          validateregdetails()
-      }
+
 //            startActivity(Intent(this, loginpage::class.java))
 
 
@@ -48,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         }
 //    }
 
-    fun validateregdetails() {
+ private   fun validateregdetails() {
 
         clearErrors()
         val name = binding.etname.text.toString()
@@ -103,8 +107,7 @@ class MainActivity : AppCompatActivity() {
             binding.pbreg.visibility = View.VISIBLE
            userViewModel.registerUser(registerRequest)
 
-//            val intent = Intent(this, loginpage::class.java)
-//            startActivity(intent)
+
 
         }
     }
@@ -115,6 +118,17 @@ class MainActivity : AppCompatActivity() {
         binding.tilnumber.error = null
         binding.tilpassword.error = null
         binding.tilconfpass.error = null
+    }
+    fun redirectUser(){
+        val sharedPrefs = getSharedPreferences(Constant.PREFS, Context.MODE_PRIVATE)
+        val userId = sharedPrefs.getString(Constant.USER_ID,Constant.EMPTY_SRING)
+        if (userId.isNullOrBlank()){
+            startActivity(Intent(this,loginpage::class.java))
+        }
+        else{
+            startActivity(Intent(this,homepage::class.java))
+        }
+        finish()
     }
 }
 

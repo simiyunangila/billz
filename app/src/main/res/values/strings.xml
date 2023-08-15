@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">billz</string>
+    <string name="paid" />
+    <string name="setting" />
+    <string name="summary" />
+    <string name="upcoming" />
+    <!-- TODO: Remove or change this placeholder text -->
+   
+
 </resources>

@@ -1,5 +1,6 @@
 package com.example.billz.ui
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,7 +12,9 @@ import com.example.billz.R
 import com.example.billz.ViewModel.UserViewModel
 import com.example.billz.databinding.ActivityLoginpageBinding
 import com.example.billz.model.LoginRequest
+import com.example.billz.model.LoginResponse
 import com.example.billz.model.RegisterRequest
+import com.example.billz.utils.Constant
 
 class loginpage : AppCompatActivity() {
     lateinit var binding: ActivityLoginpageBinding
@@ -19,25 +22,28 @@ class loginpage : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginpageBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_loginpage)
+        setContentView(binding.root)
     }
 
     override fun onResume() {
         super.onResume()
-        setContentView(binding.root)
+        binding.button2.setOnClickListener {
+            validatelogin()
+
+        }
         userViewModel.errLiveData.observe(this, Observer { error ->
             Toast.makeText(this, error, Toast.LENGTH_LONG).show()
             binding.pBar.visibility = View.GONE
         })
         userViewModel.logLiveData.observe(this, Observer { logResponse ->
+            persistLogin(logResponse)
+            binding.pBar.visibility = View.GONE
             Toast.makeText(this, logResponse.message, Toast.LENGTH_LONG).show()
             startActivity(Intent(this, homepage::class.java))
-            binding.pBar.visibility = View.GONE
-        })
-        binding.button2.setOnClickListener {
-            validatelogin()
+            finish()
 
-        }
+        })
+
 
     }
 
@@ -74,4 +80,12 @@ class loginpage : AppCompatActivity() {
         binding.tilemail1.error = null
         binding.tilpasssword.error = null
    }
+
+    fun persistLogin(loginResponse: LoginResponse){
+        val sharedPrefs = getSharedPreferences(Constant.PREFS,Context.MODE_PRIVATE)
+        val editor = sharedPrefs.edit()
+        editor.putString(Constant.USER_ID,loginResponse.user_id)
+        editor.putString(Constant.ACCESS_TOKEN,loginResponse.access_token)
+        editor.apply()
+    }
 }
