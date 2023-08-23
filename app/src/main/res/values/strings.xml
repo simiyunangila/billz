@@ -4,7 +4,14 @@
     <string name="setting" />
     <string name="summary" />
     <string name="upcoming" />
+    <string name="add_bill">Add Bill</string>
     <!-- TODO: Remove or change this placeholder text -->
-   
+    <string-array name="frequencies">
+        <item>Weekly</item>
+        <item>Monthly</item>
+        <item>Quarterly</item>
+        <item>Annual</item>
+    </string-array>
+
 
 </resources>

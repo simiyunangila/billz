@@ -6,9 +6,21 @@
     tools:context=".ui.SettingFragment">
 
     <!-- TODO: Update blank fragment layout -->
+
     <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="100dp"
+        android:text="Log out" />
+
+    <TextView
+        android:id="@+id/tvlogout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="setting" />
+
+
 
 </FrameLayout>
